@@ -1,0 +1,18 @@
+<div id="root"> </div>
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script> <!-- Link to react -->
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script> <!-- To include JSX with Babel -->
+
+<script type="text/babel">
+  const rootElement = document.getElementById('root')
+  console.log(element)
+  const content = "Hello Juan Gaviria"
+  //const element = <div className="container"> {content} </div> //Frist way
+  const props = {
+    className: 'container',
+    children: 'Hello Juan Gaviria Agudelo',
+  }
+  const element = <div {...props} /> // Second Way
+  console.log(element)
+  ReactDOM.render(element, root)
+</script>
