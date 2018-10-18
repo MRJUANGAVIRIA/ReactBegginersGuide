@@ -1,0 +1,18 @@
+<div id="root"> </div>
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script> <!-- Link to react -->
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script> <!-- To include JSX with Babel -->
+
+<script type="text/babel">
+ const rootElement = document.getElementById('root')
+ const Message= props => <div> {props.msg}</div>
+  const element = (
+    <div class="container">
+
+      <Message msg="Hello world"/>
+      <Message msg="Goodbye world"/>
+
+    </div>
+  )
+  ReactDOM.render(element, root)
+</script>
