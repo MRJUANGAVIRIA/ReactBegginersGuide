@@ -1,0 +1,83 @@
+<body>
+
+
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+<script src="https://unpkg.com/vanilla-tilt@1.4.1/dist/vanilla-tilt.min.js"></script>
+
+
+<div id="root"> </div>
+
+<style>
+.tilt-root {
+  height: 150px;
+  width: 200px;
+  background: #7F7FD5;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(left, #91EAE4, #86A8E7, #7F7FD5);
+  background: -o-linear-gradient(left, #91EAE4, #86A8E7, #7F7FD5);
+  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */ /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+}
+
+.tilt-child {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translateZ(30px) translateX(-50px) translateY(-50px);
+  box-shadow: 0 0 50px 0 rgba(51, 51, 51, 0.3);
+  background-color: white;
+}
+.totally-centered {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+</style>
+
+<script type="text/babel">
+
+class Tilt extends React.Component {
+
+  componentDidMount(){
+    VanillaTilt.init(this.rootNode, {
+      max: 25,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.5,
+    })
+    console.log(this.rootNode)
+  }
+  render() {
+    return (
+      <div ref={node => (this.rootNode = node)} className="tilt-root">
+        <div className="tilt-child">
+          <div {...this.props}/>
+        </div>
+      </div>
+    )
+  }
+}
+
+const element = (
+  <div className="totally-centered">
+    <Tilt>
+      <div className="totally-centered">
+        vanilla-tilt.js
+      </div>
+    </Tilt>
+  </div>
+)
+
+const rootElement = document.getElementById('root')
+ReactDOM.render(element,rootElement)
+</script>
+</body>
