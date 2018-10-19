@@ -1,0 +1,53 @@
+<body>
+
+
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script> <!-- Link to react -->
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script> <!-- To include JSX with Babel -->
+
+<div id="root"> </div>
+
+<script type="text/babel">
+const rootElement = document.getElementById('root')
+const state = {eventCount: 0, username: ''}
+
+function App(){
+  return (
+    <div>
+      <p>
+        There have been {state.eventCount} events
+      </p>
+      <p>
+        <button onClick={increment} > Touch Me </button>
+      </p>
+      <p> You typed: {state.username}</p>
+      <p>
+        <input onChange = {changeUser}/>
+      </p>
+    </div>
+  )
+}
+
+// setState({eventCount:10, username: 'Juan'})
+
+function increment(){
+  setState({eventCount: state.eventCount + 1 })
+}
+
+function changeUser(event){
+  console.log(event.target.value)
+  setState({username: event.target.value})
+}
+
+function setState(newState){
+  Object.assign(state, newState)
+  renderApp()
+}
+
+function renderApp(){
+  ReactDOM.render(<App/>, rootElement)
+}
+renderApp()
+</script>
+</body>
