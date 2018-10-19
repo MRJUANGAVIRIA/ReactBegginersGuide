@@ -1,0 +1,70 @@
+<body>
+
+
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script> <!-- Link to react -->
+<script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script> <!-- To include JSX with Babel -->
+
+
+<div id="root"> </div>
+<script type="text/babel">
+
+class StopWatch extends React.Component {
+  state = {lapse: 0 , running:false}
+
+  handleRunClick = () => {
+    this.setState( state => {
+
+      if (state.running) {
+        clearInterval(this.timer)
+      }else {
+        const startTime = Date.now() - this.state.lapse
+        this.timer = setInterval(() => {
+          this.setState({lapse: Date.now() - startTime})
+        })
+      }
+      console.log(state.running)
+      console.log(state.lapse)
+      return {running: !state.running}
+    })
+  }
+
+  handleClearClick = () => {
+    clearInterval(this.timer)
+    this.setState({lapse: 0, running: false})
+  }
+
+  render() {
+    const {lapse, running} = this.state
+    const buttonStyles = {
+      border: '1px solid #ccc',
+      background: '#fff',
+      fontsize: '2em',
+      padding: 15,
+      margin: 5,
+      width: 200,
+    }
+    return(
+      <div style = {{textAlign: 'center'}}>
+        <div>
+          <label style= {{fontSize: '5em', display: 'block'}}>
+            {lapse}ms
+          </label>
+        </div>
+        <div>
+          <button onClick={this.handleRunClick} style={buttonStyles}>{running ? 'Stop' : 'Start'}</button>
+        </div>
+        <div>
+          <button onClick= {this.handleClearClick} style={buttonStyles}>Clear</button>
+        </div>
+      </div>
+    )
+
+  }
+}
+const rootElement = document.getElementById('root')
+const element = <StopWatch/>
+ReactDOM.render(element,rootElement)
+</script>
+</body>
